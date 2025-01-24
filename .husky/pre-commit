@@ -1,0 +1,7 @@
+yarn lint-staged
+
+node .husky/../scripts/platform-runner.js -s false --file-name=lint-module --fallback-module-name=global
+
+node .husky/../scripts/platform-runner.js -s false --file-name=test-module --fallback-module-name=global
+
+exit 0

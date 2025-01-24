@@ -1,0 +1,12 @@
+# .lintstagedrc.yml
+
+# Files matching the pattern will be processed
+'*.{js,jsx,ts,tsx}':
+  - eslint --fix --quiet # Fix errors but allow warnings
+  - prettier --write # Fix formatting issues
+
+'*.json':
+  - prettier --write # Fix formatting issues
+
+'*.{md,mdx,css,scss,astro,yaml,yml}':
+  - prettier --write # Fix formatting issues
