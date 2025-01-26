@@ -30,6 +30,9 @@ function runScript(props) {
         stdio: 'inherit',
       });
     } else {
+      console.log(`Setting execute permission for script: ${scriptPath}`);
+      execSync(`chmod +x ${scriptPath}`);
+      
       console.log(`Running Bash script: ${command}`);
       execSync(command, { stdio: 'inherit' });
     }
