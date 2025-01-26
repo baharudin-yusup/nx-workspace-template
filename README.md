@@ -1,101 +1,146 @@
-# NxWorkspaceTemplate
+# Nx Workspace Template
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Welcome to the Nx Workspace Template! This repository serves as a foundational template for building scalable and maintainable applications using the [Nx](https://nx.dev) build system.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## Table of Contents
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Available Scripts](#available-scripts)
+- [Configuration Files](#configuration-files)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Run tasks
+## Introduction
 
-To run the dev server for your app, use:
+This Nx workspace is configured to streamline the development process, providing a robust setup for building modern applications. It includes essential configurations and tools to ensure code quality, consistency, and efficient project management.
 
-```sh
-npx nx dev nx-workspace-template
+You can either **clone this repository** or **use it as a GitHub template** to create your own workspace.
+
+## Getting Started
+
+To get started with this workspace, you have two options:
+
+### Option 1: Use as a GitHub Template
+1. Click the **"Use this template"** button at the top of this repository on GitHub.
+2. Enter your new repository details and click **"Create repository from template"**.
+3. Clone your newly created repository:
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+   cd your-repository
+   ```
+
+### Option 2: Clone This Repository
+1. Clone the repository directly:
+   ```bash
+   git clone https://github.com/baharudin-yusup/nx-workspace-template.git
+   cd nx-workspace-template
+   ```
+
+### Common Steps (Both Options)
+1. **Install dependencies:**
+
+   Ensure you have [Yarn](https://yarnpkg.com/) installed. Then, run:
+
+   ```bash
+   yarn install
+   ```
+
+2. **Edit Module List (Required):**
+
+   Update the module list in `scripts/utils/get-module-list.js` to ensure all modules (apps and libraries) are properly registered. This is essential for the provided scripts to work correctly.
+
+   Example structure:
+
+   ```javascript
+   // scripts/utils/get-module-list.js
+
+   function getModuleList() {
+     return [
+       {
+         name: 'Module A', // Friendly name, easy for users to understand
+         value: 'module-a', // Exact app/lib/package name in the Nx workspace
+         branchPatterns: /^module\/a\//, // Regex to match branch names for this module
+       }
+     ];
+   };
+   ```
+
+   - **`name`**: A user-friendly name for the module.
+   - **`value`**: The exact name of the app, library, or package as defined in Nx (used in `nx generate` or `nx.json`).
+   - **`branchPatterns`**: A regex pattern to detect the current module based on the branch name.
+
+3. **Start the development server:**
+
+   Use the following command to serve an app for development based on the current branch's naming pattern.
+
+   ```bash
+   yarn serve
+   ```
+
+## Project Structure
+
+The workspace follows a modular structure:
+
+- **apps/**: Contains the applications in the workspace.
+- **libs/**: Contains shared libraries used across applications.
+- **.husky/**: Configuration for Git hooks using Husky.
+- **.vscode/**: Workspace settings for Visual Studio Code.
+- **scripts/**: Utility scripts for tasks such as managing modules.
+
+## Available Scripts
+
+This workspace provides the following scripts:
+
+### Serve an Application
+```bash
+yarn serve
 ```
+Serves the specified app for development based on the current branch's naming pattern.
 
-To create a production bundle:
-
-```sh
-npx nx build nx-workspace-template
+### Run Tests
+```bash
+yarn test
 ```
+Runs unit tests for the specified app or library based on the current branch's naming pattern.
 
-To see all available targets to run for a project, run:
-
-```sh
-npx nx show project nx-workspace-template
+### Run Linting
+```bash
+yarn lint
 ```
+Runs linting for the specified app or library based on the current branch's naming pattern.
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+> **Tip**: The module list in `scripts/utils/get-module-list.js` must be kept up to date for these scripts to work.
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Configuration Files
 
-## Add new projects
+Key configuration files in the workspace:
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+- **.editorconfig**: Defines coding styles and formatting.
+- **.gitignore**: Specifies files and directories to be ignored by Git.
+- **.prettierrc**: Configuration for Prettier code formatter.
+- **.prettierignore**: Files and directories to be ignored by Prettier.
+- **.lintstagedrc.yml**: Configuration for lint-staged to run linters on staged Git files.
+- **eslint.config.cjs**: Configuration for ESLint.
+- **jest.config.ts**: Configuration for Jest testing framework.
+- **nx.json**: Nx workspace configuration.
+- **tsconfig.base.json**: Base TypeScript configuration.
+- **package.json**: Contains project metadata and scripts.
+- **yarn.lock**: Ensures consistent dependency versions.
 
-Use the plugin's generator to create new projects.
+## Contributing
 
-To generate a new application, use:
+Contributions are welcome! Please follow these steps:
 
-```sh
-npx nx g @nx/next:app demo
-```
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
 
-To generate a new library, use:
+Ensure that your code adheres to the established coding standards and passes all tests.
 
-```sh
-npx nx g @nx/react:lib mylib
-```
+## License
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
