@@ -52,3 +52,11 @@ out
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Environment Files
+.env
+.env.*
+!.env.template
+!.env.example
+!*.env.template
+!*.env.example
