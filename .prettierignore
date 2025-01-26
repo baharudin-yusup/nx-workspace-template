@@ -1,5 +1,33 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
+# Ignore build outputs and cache directories
+node_modules/
+dist/
+tmp/
+coverage/
 /.nx/cache
 /.nx/workspace-data
+
+# Ignore Next.js build outputs
+.next/
+out/
+
+# Ignore environment variable files
+.env
+.env.*
+!.env.template
+!.env.example
+
+# Ignore lockfiles (optional, but commonly skipped)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore generated files and logs
+*.log
+logs/
+*.log.*
+
+# Ignore OS and IDE-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
